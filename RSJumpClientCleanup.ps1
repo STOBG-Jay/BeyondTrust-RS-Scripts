@@ -4,7 +4,7 @@ $LogDate = (Get-Date).tostring("yyyyMMdd-HHmmss")
 $LogFile = $LogPrefix + $LogDate + ".txt"
 Function Write-Log {
     param(
-		[Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
         [String]$msg
     )
     Add-Content $LogFile $msg
