@@ -94,7 +94,7 @@ foreach ($client in $clientList) {
         }
     }
     $i = $i+1
-	if ($ucount -ge 1) { Write-Progress -Activity "Building List of duplicate jump clients" -Status "Progress:" -PercentComplete ($i/$ucount*100) }
+    if ($ucount -ge 1) { Write-Progress -Activity "Building List of duplicate jump clients" -Status "Progress:" -PercentComplete ($i/$ucount*100) }
 }
 Write-Output "$($oldClients.Count) duplicate out-of-date Jump Clients found."
 Write-Output "$($dupClients.Count) other duplicate Jump Clients found."
