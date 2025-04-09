@@ -44,7 +44,7 @@ do {
         $jcURI = $apiURI + "jump-client?per_page=$($perPg)&current_page=$($pgNo)"
         $AllJumpClients = $null;
         $ProgressPreference = 'SilentlyContinue'
-        $AllJumpClients = Invoke-WebRequest -Uri $jcURI -Method 'GET' -Headers $headers -ContentType "application/json"
+        $AllJumpClients = Invoke-WebRequest -Uri $jcURI -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction Stop
         $ProgressPreference = 'Continue'
     }
     catch [Exception] {
@@ -106,7 +106,7 @@ if ($oldClients.Count -gt 0) {
     foreach ($client in $oldClients) { 
         $remURI = $apiURI + "jump-client/$($client.id)"
         try {
-            Invoke-WebRequest -Uri $remURI -Method 'DELETE' -Headers $headers -ContentType 'application/json' | Out-Null
+            Invoke-WebRequest -Uri $remURI -Method 'DELETE' -Headers $headers -ContentType 'application/json' -ErrorAction Stop | Out-Null
             Write-Log "SUCCESS Removing duplicate jump client $($client.name)."
         }
         catch {
@@ -126,7 +126,7 @@ if ($dupClients.Count -gt 0) {
     foreach ($client in $dupClients) {
         $remURI = $apiURI + "jump-client/$($client.id)"
         try {
-            Invoke-WebRequest -Uri $remURI -Method 'DELETE' -Headers $headers -ContentType 'application/json' | Out-Null
+            Invoke-WebRequest -Uri $remURI -Method 'DELETE' -Headers $headers -ContentType 'application/json' -ErrorAction Stop | Out-Null
             Write-Log "SUCCESS Removing duplicate jump client $($client.name)."
         }
         catch {
