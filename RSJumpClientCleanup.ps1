@@ -23,8 +23,15 @@ $EncodeCred = [Convert]::ToBase64String([System.Text.Encoding]::utf8.GetBytes($C
 $Header = @{"Authorization" = "Basic $EncodeCred"}
 $Body = @{"grant_type" = "client_credentials"}
 #Get Auth bearer token
-$AuthToken = Invoke-RestMethod -Method POST -Header $Header -body $Body -uri "$($apiConfig.baseURI)/oauth2/token"
-$headers= @{authorization= $AuthToken.token_type + ' '+ $AuthToken.access_token}
+try {
+    $AuthToken = Invoke-RestMethod -Method POST -Header $Header -body $Body -uri "$($apiConfig.baseURI)/oauth2/token" -ErrorAction Stop
+    $headers= @{authorization= $AuthToken.token_type + ' '+ $AuthToken.access_token}
+}
+catch {
+    Write-Error "ERROR obtaining Authentication Token."
+    Write-Error $_
+    Exit 1
+}
 
 $apiURI = $apiConfig.baseURI + "/api/config/v1/"
 $perPg = 100
