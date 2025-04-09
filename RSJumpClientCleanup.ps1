@@ -40,10 +40,17 @@ $pgNo = 1
 $Gatherdata = $();
 $jcURI = $apiURI + "jump-client?per_page=$($perPg)&current_page=$($pgNo)"
 $AllJumpClients = $null;
-$AllJumpClients = Invoke-WebRequest -Uri $jcURI -Method 'GET' -Headers $headers -ContentType "application/json"
-[String]$totalClients = $AllJumpClients.Headers.'X-BT-Pagination-Total'
-$totalClients = [Int]$totalClients
-$totalPages = [math]::ceiling($totalClients / $perPg)  #total clients divided by clients-per-page, rounded up
+try {
+    $AllJumpClients = Invoke-WebRequest -Uri $jcURI -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction Stop
+    [String]$totalClients = $AllJumpClients.Headers.'X-BT-Pagination-Total'
+    $totalClients = [Int]$totalClients
+    $totalPages = [math]::ceiling($totalClients / $perPg)  #total clients divided by clients-per-page, rounded up
+}
+catch {
+    Write-Error "Error retrieving list of jump clients from BeyondTrust RS API."
+    Write-Error $_
+    Exit 1
+}
 
 # Processes through each page to fetch ALL jump clients into one object
 do {
