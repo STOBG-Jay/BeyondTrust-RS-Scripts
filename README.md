@@ -9,7 +9,7 @@ API information should be stored in JSON format in a file named "rs_api.json".
 The scripts assume the following format:
 ```
 {
-    "baseURI":"https://remotesuporturl.domain.com",
+    "baseURI":"https://remotesupporturl.domain.com",
     "ClientID":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "Secret":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
