@@ -1,7 +1,7 @@
 # Begin Log Function defintion
 $LogPrefix = "RS_JumpClient_Cleanup_"
 $LogDate = (Get-Date).tostring("yyyyMMdd-HHmmss")
-$LogFile = $LogPrefix + $LogDate + ".txt"
+$LogFile = ".\logs\" + $LogPrefix + $LogDate + ".txt"
 Function Write-Log {
     param(
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
